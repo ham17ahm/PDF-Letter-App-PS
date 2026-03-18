@@ -14,7 +14,7 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: #f9f9f9;
+  background-color: #fff;
   font-family: serif;
 }
 
@@ -90,6 +90,10 @@ body {
   line-height: 1.75;
 }
 
+.main_text p {
+  text-indent: 1.6em;
+}
+
 .wassalam {
   text-align: center;
   margin-bottom: -0.25em;
@@ -108,16 +112,14 @@ body {
   text-align: center;
   font-size: 22pt;
   font-family: Usman;
-  padding-right: 6mm;
 }
 
 /* Footnote — matches original .right-margin-footer { padding-right: 2.8cm } */
 .footnote-container {
   position: absolute;
-  bottom: 2cm;
-  left: 0;
-  right: 0;
-  padding-right: 2.8cm;
+  bottom: 2.2cm;
+  left: 3.25cm;
+  right: 3cm;
   font-size: 14pt;
   font-family: Jameel;
   direction: rtl;
@@ -139,10 +141,27 @@ p {
   @page {
     size: A4 portrait;
     margin: 0;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
+  * {
+    color: #000 !important;
+    text-shadow: none !important;
+    opacity: 1 !important;
+    filter: none !important;
+  }
+
+  .htc {
+    color: blue !important;
   }
 
   body {
     background-color: white;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
   }
 
   .letter-container {

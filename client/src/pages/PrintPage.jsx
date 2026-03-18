@@ -13,6 +13,18 @@ const cssMap = {
   "hz-urdu": printHZUrduCss,
 };
 
+function formatText(text) {
+  if (!text) return '';
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/\n\n+/g, '</p><p>')
+    .replace(/\n/g, '<br>')
+    .replace(/^/, '<p>')
+    .replace(/$/, '</p>');
+}
+
 function formatDate() {
   const today = new Date();
   const dd = String(today.getDate()).padStart(2, "0");
@@ -29,13 +41,23 @@ function PSEnglishTemplate({ text, addressee, footnote, date }) {
       <div className="letter-content">
         <div className="page-head">
           <div className="letterhead-Bismillah">بسم اللّٰہ الرحمٰن الرحیم</div>
-          <div className="letterhead-Bismillah">نحمدہٗ ونصلّی علیٰ رسولہ الکریم وعلیٰ عبدہٖ المیسح الموعود</div>
+          <div className="letterhead-Bismillah">
+            نحمدہٗ ونصلّی علیٰ رسولہ الکریم وعلیٰ عبدہٖ المیسح الموعود
+          </div>
           <div className="letterhead-Bismillah">ھو الناصر</div>
-          <div className="letterhead-english">In the Name of <b className="one">Allah</b>, most Gracious, ever Merciful</div>
+          <div className="letterhead-english">
+            In the Name of <b className="one">Allah</b>, most Gracious, ever
+            Merciful
+          </div>
           <div className="line-1"></div>
           <div className="line-2"></div>
-          <div className="letterhead-english">Private Secretary to <b className="one">Hazrat Khalifatul-Masih V</b></div>
-          <div className="letterhead-arabic-salutation">ایدہ اللہ تعالیٰ بنصرہ العزیز</div>
+          <div className="letterhead-english">
+            Private Secretary to{" "}
+            <b className="one">Hazrat Khalifatul-Masih V</b>
+          </div>
+          <div className="letterhead-arabic-salutation">
+            ایدہ اللہ تعالیٰ بنصرہ العزیز
+          </div>
         </div>
 
         <div className="letter-body">
@@ -49,7 +71,11 @@ function PSEnglishTemplate({ text, addressee, footnote, date }) {
           <div className="salam">
             اَلسَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللهِ وَبَرَكَاتُه
           </div>
-          <div className="main_text text" style={{ lineHeight: 1.2 }} dangerouslySetInnerHTML={{ __html: text }} />
+          <div
+            className="main_text text"
+            style={{ lineHeight: 1.2 }}
+            dangerouslySetInnerHTML={{ __html: formatText(text) }}
+          />
           <div className="wassalam">Wassalam</div>
           <div className="greeting_end">Yours faithfully,</div>
           <div className="signature">Munir Ahmad Javed</div>
@@ -75,8 +101,14 @@ function HZEnglishTemplate({ text, addressee, footnote, date }) {
         <div className="title_fullname text">
           <div className="full_name text">{addressee}</div>
         </div>
-        <div className="salam">اَلسَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللهِ وَبَرَكَاتُه</div>
-        <div className="main_text text" style={{ lineHeight: 1.2 }} dangerouslySetInnerHTML={{ __html: text }} />
+        <div className="salam">
+          اَلسَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللهِ وَبَرَكَاتُه
+        </div>
+        <div
+          className="main_text text"
+          style={{ lineHeight: 1.2 }}
+          dangerouslySetInnerHTML={{ __html: formatText(text) }}
+        />
         <div className="wassalam">Wassalam</div>
         <div className="greeting_end">Yours sincerely,</div>
         <div className="signature">MIRZA MASROOR AHMAD</div>
@@ -94,19 +126,31 @@ function PSUrduTemplate({ text, addressee, footnote, date }) {
   return (
     <div className="letter-container">
       <div className="page_head">
-        <div className="letterhead-Bismillah htc">بِسْمِ اللہِ الرَّحْمٰنِ الرَّحِیْمِ ––– نَحْمَدُہ وَنُصَلِّی عَلیٰ رَسُوْلِەِ الْکَرِیْم</div>
-        <div className="letterhead-Bismillah htc">وَعَلیٰ عَبْدِہِ الْمَسِیْح الْمَوْعُوْد</div>
+        <div className="letterhead-Bismillah htc">
+          بِسْمِ اللہِ الرَّحْمٰنِ الرَّحِیْمِ ––– نَحْمَدُہ وَنُصَلِّی عَلیٰ
+          رَسُوْلِەِ الْکَرِیْم
+        </div>
+        <div className="letterhead-Bismillah htc">
+          وَعَلیٰ عَبْدِہِ الْمَسِیْح الْمَوْعُوْد
+        </div>
         <div className="letterhead-heading htc">پرائیویٹ سیکرٹری</div>
         <div className="letterhead-heading htc">حضرت خلیفۃ المسیح الخامس</div>
-        <div className="letterhead-heading-small htc">ایدہ اللہ تعالیٰ بنصرہ العزیز</div>
-        <div className="letterhead-heading-islamabad htc">اسلام آباد۔یوکے –– HM – {date}</div>
+        <div className="letterhead-heading-small htc">
+          ایدہ اللہ تعالیٰ بنصرہ العزیز
+        </div>
+        <div className="letterhead-heading-islamabad htc">
+          اسلام آباد۔یوکے –– HM – {date}
+        </div>
       </div>
       <div className="top_page">
         <div className="title_fullname text">
           <div className="full_name text">{addressee}</div>
         </div>
         <div className="salam">السلام علیکم ورحمۃ اللہ وبرکاتہ</div>
-        <div className="main_text text" dangerouslySetInnerHTML={{ __html: text }} />
+        <div
+          className="main_text text"
+          dangerouslySetInnerHTML={{ __html: formatText(text) }}
+        />
         <div className="wassalam">والسلام</div>
         <div className="greeting_end">خاکسار</div>
         <div className="signature_title">پرائیویٹ سیکرٹری</div>
@@ -131,7 +175,10 @@ function HZUrduTemplate({ text, addressee, footnote, date }) {
           <div className="full_name text">{addressee}</div>
         </div>
         <div className="salam text">السلام علیکم ورحمۃ اللہ وبرکاتہ</div>
-        <div className="main_text text" dangerouslySetInnerHTML={{ __html: text }} />
+        <div
+          className="main_text text"
+          dangerouslySetInnerHTML={{ __html: formatText(text) }}
+        />
         <div className="wassalam">والسلام</div>
         <div className="greeting_end">خاکسار</div>
         <div className="signature_title">خلیفۃ المسیح الخامس</div>
@@ -156,16 +203,33 @@ export default function PrintPage() {
 
   const css = cssMap[type] || "";
   const date = formatDate();
-  const props = { text: data.text, addressee: data.addressee, footnote: data.footnote, date };
+  const props = {
+    text: data.text,
+    addressee: data.addressee,
+    footnote: data.footnote,
+    date,
+  };
 
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: css }} />
-      <button className="no-print" onClick={() => window.print()} style={{
-        position: "fixed", top: 10, right: 10, zIndex: 999,
-        padding: "8px 20px", fontSize: "14px", cursor: "pointer",
-        background: "#4361ee", color: "#fff", border: "none", borderRadius: "4px",
-      }}>
+      <button
+        className="no-print"
+        onClick={() => window.print()}
+        style={{
+          position: "fixed",
+          top: 10,
+          right: 10,
+          zIndex: 999,
+          padding: "8px 20px",
+          fontSize: "14px",
+          cursor: "pointer",
+          background: "#4361ee",
+          color: "#fff",
+          border: "none",
+          borderRadius: "4px",
+        }}
+      >
         Print
       </button>
 

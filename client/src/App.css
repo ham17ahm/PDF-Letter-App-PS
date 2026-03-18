@@ -165,10 +165,10 @@ body {
   border: 1px solid #ddd;
   border-radius: 4px;
   padding: 12px;
-  font-size: 0.9rem;
+  font-size: 1rem;
   line-height: 1.5;
   resize: vertical;
-  font-family: inherit;
+  font-family: 'Amiri', serif;
 }
 
 /* ── Buttons ── */
@@ -244,8 +244,8 @@ body {
   border: 1px solid #ddd;
   border-radius: 4px;
   padding: 10px 12px;
-  font-size: 0.9rem;
-  font-family: inherit;
+  font-size: 1rem;
+  font-family: 'Amiri', serif;
 }
 
 /* ── Footnote Field ── */
@@ -262,10 +262,18 @@ body {
   border: 1px solid #ddd;
   border-radius: 4px;
   padding: 12px;
-  font-size: 0.9rem;
+  font-size: 1rem;
   line-height: 1.5;
   resize: vertical;
-  font-family: inherit;
+  font-family: 'Amiri', serif;
+}
+
+/* ── Word Limit Warning ── */
+.word-limit-warning {
+  margin-top: 6px;
+  font-size: 0.85rem;
+  color: #c0392b;
+  font-weight: 500;
 }
 
 /* ── Loading ── */

@@ -7,6 +7,7 @@ import PromptSelector from "../components/PromptSelector";
 import ResponseEditor from "../components/ResponseEditor";
 import ActionButtons from "../components/ActionButtons";
 import { uploadForOcr, processWithAI, saveLetter } from "../services/api";
+import { getDir } from "../utils/textDirection";
 
 export default function MainPage() {
   const navigate = useNavigate();
@@ -142,6 +143,7 @@ export default function MainPage() {
               value={addressee}
               onChange={(e) => setAddressee(e.target.value)}
               placeholder="e.g. Mr. John Smith,"
+              dir={getDir(addressee)}
             />
           </div>
 
@@ -158,6 +160,7 @@ export default function MainPage() {
               onChange={(e) => setFootnote(e.target.value)}
               placeholder="Enter footnote text (optional)..."
               rows={3}
+              dir={getDir(footnote)}
             />
           </div>
 

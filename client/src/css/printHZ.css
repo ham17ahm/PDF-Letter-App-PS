@@ -8,7 +8,7 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: #f9f9f9;
+  background-color: #fff;
   font-family: "Times New Roman", Times, serif;
 }
 
@@ -19,7 +19,7 @@ p {
 }
 
 .text {
-  font-size: 15pt;
+  font-size: 14.5pt;
 }
 
 /* Letter container */
@@ -38,7 +38,7 @@ p {
 
 /* Letter content */
 .letter-content {
-  padding: 7cm 3.75cm 2.5cm 4cm;
+  padding: 6.75cm 4cm 2.5cm 4cm;
 }
 
 /* Date and location */
@@ -66,7 +66,7 @@ p {
 .salam {
   text-align: center;
   font-family: Khat_Manzoor, Arial, sans-serif;
-  font-size: 18pt;
+  font-size: 17pt;
 }
 
 /* Intro text */
@@ -85,19 +85,19 @@ p {
 .wassalam {
   font-style: italic;
   margin-top: 2mm;
-  font-size: 15pt;
+  font-size: 14.5pt;
 }
 
 .greeting_end {
   margin-top: 2mm;
-  font-size: 15pt;
+  font-size: 14.5pt;
 }
 
 /* Signature */
 .signature {
-  margin-top: 18mm;
+  margin-top: 15mm;
   font-weight: bold;
-  font-size: 16pt;
+  font-size: 14.5pt;
 }
 
 .signature_title {
@@ -110,7 +110,7 @@ p {
 /* Footnote */
 .footnote-container {
   position: absolute;
-  bottom: 2.5cm;
+  bottom: 2cm;
   left: 4cm;
   right: 3.75cm;
   font-size: 10pt;
@@ -122,10 +122,21 @@ p {
   @page {
     size: A4 portrait;
     margin: 0;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  * {
+    color: #000 !important;
+    text-shadow: none !important;
+    opacity: 1 !important;
+    filter: none !important;
   }
 
   body {
-    background-color: white;
+    background-color: #fff;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
 
   .letter-container {
@@ -140,7 +151,7 @@ p {
   }
 
   .letter-content {
-    padding: 7cm 3.75cm 2.5cm 4cm;
+    padding: 6.75cm 4cm 2.5cm 4cm;
   }
 
   /* Hide UI elements when printing */

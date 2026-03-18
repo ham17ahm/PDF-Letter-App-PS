@@ -65,6 +65,10 @@ body {
   word-spacing: -1.5px;
 }
 
+.main_text p {
+  text-indent: 1.6em;
+}
+
 .wassalam {
   margin-bottom: -0.25em;
   font-size: 22pt;
@@ -114,10 +118,21 @@ p {
   @page {
     size: A4 portrait;
     margin: 0;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  * {
+    color: #000 !important;
+    text-shadow: none !important;
+    opacity: 1 !important;
+    filter: none !important;
   }
 
   body {
     background-color: white;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
 
   .letter-container {
