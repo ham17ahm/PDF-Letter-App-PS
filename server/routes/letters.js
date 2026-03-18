@@ -6,7 +6,7 @@ const router = express.Router();
 // POST /api/letters — Save a letter
 router.post("/", async (req, res) => {
   try {
-    const { originalText, processedText, promptUsed, originalFileName, tags, notes } =
+    const { originalText, processedText, promptUsed, originalFileName, addressee, footnote, tags, notes } =
       req.body;
 
     if (!originalText || !processedText || !promptUsed) {
@@ -21,6 +21,8 @@ router.post("/", async (req, res) => {
       processedText,
       promptUsed,
       originalFileName,
+      addressee,
+      footnote,
       tags,
       notes,
     });

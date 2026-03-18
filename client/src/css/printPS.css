@@ -188,7 +188,6 @@ p {
     background-color: white;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
-    color-adjust: exact !important;
   }
 
   .letter-container {
@@ -214,7 +213,6 @@ p {
     background-color: black !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
-    color-adjust: exact !important;
   }
 
   /* Hide UI elements when printing */

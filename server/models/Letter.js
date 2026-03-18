@@ -6,6 +6,10 @@ const letterSchema = new mongoose.Schema({
   processedText: { type: String, required: true },
   promptUsed: { type: String, required: true },
 
+  // ── Letter fields ──
+  addressee: { type: String },
+  footnote: { type: String },
+
   // ── Metadata ──
   originalFileName: { type: String },
 

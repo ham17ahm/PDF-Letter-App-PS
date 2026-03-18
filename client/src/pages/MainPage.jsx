@@ -77,6 +77,8 @@ export default function MainPage() {
         processedText: aiResponse,
         promptUsed: selectedPromptId,
         originalFileName,
+        addressee,
+        footnote,
       });
       if (result.success) {
         alert("Letter saved successfully!");
