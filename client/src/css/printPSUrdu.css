@@ -1,0 +1,166 @@
+@font-face {
+  font-family: Jameel;
+  src: url("/fonts/Jameel Noori Nastaleeq.ttf");
+}
+@font-face {
+  font-family: Kufi;
+  src: url("/fonts/ArbFONTS-Hasan_Hiba.ttf");
+}
+@font-face {
+  font-family: Usman;
+  src: url("/fonts/UTHMANTN1B VER09.OTF");
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+  font-family: serif;
+}
+
+/* Letter container */
+.letter-container {
+  position: relative;
+  width: 210mm;
+  height: 297mm;
+  margin: 20px auto;
+  padding-top: 1.7cm;
+  padding-bottom: 2cm;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  page-break-after: always;
+  border: 1px solid #ddd;
+  overflow: hidden;
+}
+
+.page_head {
+  padding-right: 1.35cm;
+  direction: rtl;
+}
+
+.htc {
+  color: blue;
+}
+
+.letterhead-Bismillah {
+  text-align: center;
+  font-size: 15pt;
+}
+
+.letterhead-heading {
+  font-family: Kufi;
+  font-size: 26pt;
+  line-height: 26pt;
+}
+
+.letterhead-heading-small {
+  font-family: Kufi;
+  font-size: 17pt;
+  line-height: 16pt;
+}
+
+.letterhead-heading-islamabad {
+  font-family: Jameel;
+  font-size: 14pt;
+  line-height: 12pt;
+}
+
+.top_page {
+  margin-right: 3.8cm;
+  margin-left: 3.8cm;
+  direction: rtl;
+}
+
+.title_fullname {
+  text-indent: 2.4em;
+  margin-top: 4mm;
+  font-family: Jameel;
+}
+
+.salam {
+  text-align: center;
+  font-family: Jameel;
+  font-size: 18pt;
+}
+
+.main_text {
+  text-align: justify;
+  font-family: Jameel;
+  line-height: 1.75;
+}
+
+.wassalam {
+  text-align: center;
+  margin-bottom: -0.25em;
+  font-size: 18pt;
+  font-family: Jameel;
+}
+
+.greeting_end {
+  text-align: center;
+  font-size: 18pt;
+  font-family: Jameel;
+  margin-bottom: 17mm;
+}
+
+.signature_title {
+  text-align: center;
+  font-size: 22pt;
+  font-family: Usman;
+  padding-right: 6mm;
+}
+
+/* Footnote — matches original .right-margin-footer { padding-right: 2.8cm } */
+.footnote-container {
+  position: absolute;
+  bottom: 2cm;
+  left: 0;
+  right: 0;
+  padding-right: 2.8cm;
+  font-size: 14pt;
+  font-family: Jameel;
+  direction: rtl;
+  white-space: pre-wrap;
+}
+
+.text {
+  font-size: 18pt;
+}
+
+p {
+  margin-top: 2mm;
+  margin-bottom: 2mm;
+  text-indent: 1.6em;
+}
+
+/* Print-specific styles */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+
+  body {
+    background-color: white;
+  }
+
+  .letter-container {
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    box-shadow: none;
+    border: none;
+    page-break-after: always;
+    break-after: page;
+    position: relative;
+  }
+
+  /* Hide UI elements when printing */
+  button,
+  input,
+  select,
+  .no-print {
+    display: none !important;
+  }
+}

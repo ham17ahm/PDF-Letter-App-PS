@@ -1,0 +1,153 @@
+/* Fonts */
+@font-face {
+  font-family: Khat_Manzoor;
+  src: url("/fonts/_Khat_Manzoor.ttf");
+}
+
+/* Regular and print styles combined */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+  font-family: "Times New Roman", Times, serif;
+}
+
+/* General text */
+p {
+  margin-top: 2mm;
+  margin-bottom: 2mm;
+}
+
+.text {
+  font-size: 15pt;
+}
+
+/* Letter container */
+.letter-container {
+  position: relative;
+  width: 210mm;
+  height: 297mm;
+  margin: 20px auto;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  page-break-after: always;
+  border: 1px solid #ddd;
+  overflow: hidden;
+}
+
+/* Letter content */
+.letter-content {
+  padding: 7cm 3.75cm 2.5cm 4cm;
+}
+
+/* Date and location */
+.date_location_combined {
+  text-align: right;
+  font-size: 10pt;
+}
+
+.date {
+  text-decoration: overline;
+}
+
+/* Title and full name */
+.title_fullname {
+  margin-top: 3mm;
+  margin-bottom: 2mm;
+}
+
+.title,
+.full_name {
+  display: inline-block;
+}
+
+/* Salam */
+.salam {
+  text-align: center;
+  font-family: Khat_Manzoor, Arial, sans-serif;
+  font-size: 18pt;
+}
+
+/* Intro text */
+.intro_text {
+  margin-bottom: 2mm;
+}
+
+/* Main text */
+.main_text,
+.note_text,
+.intro_text {
+  text-align: justify;
+}
+
+/* Wassalam and greeting end */
+.wassalam {
+  font-style: italic;
+  margin-top: 2mm;
+  font-size: 15pt;
+}
+
+.greeting_end {
+  margin-top: 2mm;
+  font-size: 15pt;
+}
+
+/* Signature */
+.signature {
+  margin-top: 18mm;
+  font-weight: bold;
+  font-size: 16pt;
+}
+
+.signature_title {
+  font-style: italic;
+  font-size: 14pt;
+  margin: 0;
+  position: relative;
+}
+
+/* Footnote */
+.footnote-container {
+  position: absolute;
+  bottom: 2.5cm;
+  left: 4cm;
+  right: 3.75cm;
+  font-size: 10pt;
+  white-space: pre-wrap;
+}
+
+/* Print-specific styles */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+
+  body {
+    background-color: white;
+  }
+
+  .letter-container {
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    box-shadow: none;
+    border: none;
+    page-break-after: always;
+    break-after: page;
+    position: relative;
+  }
+
+  .letter-content {
+    padding: 7cm 3.75cm 2.5cm 4cm;
+  }
+
+  /* Hide UI elements when printing */
+  button,
+  input,
+  select,
+  .no-print {
+    display: none !important;
+  }
+}

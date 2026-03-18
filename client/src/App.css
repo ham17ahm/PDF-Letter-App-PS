@@ -1,0 +1,283 @@
+/* ── Landing Page ── */
+.landing-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  gap: 16px;
+  background: #1a1a2e;
+  color: #fff;
+}
+
+.landing-page h1 {
+  font-size: 2.4rem;
+}
+
+.landing-page p {
+  color: #aaa;
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+}
+
+.btn-large {
+  padding: 16px 40px;
+  font-size: 1.15rem;
+  border-radius: 8px;
+}
+
+/* ── Back Button ── */
+.btn-back {
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 6px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.btn-back:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.header-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-extract {
+  background: #e07c24;
+  color: #fff;
+}
+
+.btn-extract:hover:not(:disabled) {
+  background: #c96b1d;
+}
+
+/* ── Layout ── */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: #f5f5f5;
+  color: #333;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  background: #1a1a2e;
+  color: #fff;
+}
+
+.app-header h1 {
+  font-size: 1.4rem;
+}
+
+/* ── Workspace (split screen) ── */
+.workspace {
+  display: flex;
+  height: calc(100vh - 60px);
+}
+
+.panel {
+  overflow-y: auto;
+  padding: 16px;
+}
+
+.panel-left {
+  flex: 1;
+  border-right: 1px solid #ddd;
+  background: #fff;
+}
+
+.panel-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: #fafafa;
+}
+
+/* ── PDF Viewer ── */
+.pdf-viewer {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  background: #e8e8e8;
+  padding: 12px 0;
+}
+
+.pdf-page-canvas {
+  width: 100%;
+  height: auto;
+  display: block;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+  background: #fff;
+}
+
+.pdf-viewer--empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  font-size: 1.1rem;
+  background: #fff;
+}
+
+/* ── OCR Text Panel ── */
+.ocr-text-panel h3,
+.response-editor h3,
+.prompt-selector h3 {
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+  color: #555;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.ocr-text-content {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 12px;
+  max-height: 200px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* ── Response Editor ── */
+.response-editor textarea {
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 12px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  resize: vertical;
+  font-family: inherit;
+}
+
+/* ── Buttons ── */
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: #4361ee;
+  color: #fff;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #3a56d4;
+}
+
+.btn-success {
+  background: #2ec4b6;
+  color: #fff;
+}
+
+.btn-success:hover:not(:disabled) {
+  background: #26a69a;
+}
+
+.btn-secondary {
+  background: #6c757d;
+  color: #fff;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: #5a6268;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btn-print {
+  background: #6c757d;
+  color: #fff;
+  font-size: 0.85rem;
+  padding: 8px 14px;
+}
+
+.btn-print:hover:not(:disabled) {
+  background: #5a6268;
+}
+
+/* ── Addressee Field ── */
+.addressee-field h3 {
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+  color: #555;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.addressee-field input {
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 10px 12px;
+  font-size: 0.9rem;
+  font-family: inherit;
+}
+
+/* ── Footnote Field ── */
+.footnote-field h3 {
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+  color: #555;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.footnote-field textarea {
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 12px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  resize: vertical;
+  font-family: inherit;
+}
+
+/* ── Loading ── */
+.loading {
+  color: #4361ee;
+  font-style: italic;
+  padding: 12px 0;
+}
+
+/* ── Print media ── */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}
