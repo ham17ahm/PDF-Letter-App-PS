@@ -26,3 +26,6 @@ Thumbs.db
 # Editor
 .vscode/
 .idea/
+
+# Fonts (large binary files, not needed in version control)
+client/public/fonts/
