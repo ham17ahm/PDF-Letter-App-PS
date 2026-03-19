@@ -7,7 +7,7 @@ const router = express.Router();
 // POST /api/ai/process — Process OCR text with a selected prompt
 router.post("/process", async (req, res) => {
   try {
-    const { ocrText, promptId } = req.body;
+    const { ocrText, promptId, note } = req.body;
 
     if (!ocrText || !promptId) {
       return res
@@ -22,7 +22,7 @@ router.post("/process", async (req, res) => {
         .json({ success: false, error: `Unknown prompt ID: ${promptId}` });
     }
 
-    const response = await processWithAI(prompt.promptText, ocrText);
+    const response = await processWithAI(prompt.promptText, ocrText, note);
     res.json({ success: true, response });
   } catch (error) {
     console.error("AI processing error:", error.message);

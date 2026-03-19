@@ -248,6 +248,40 @@ body {
   font-family: 'Amiri', serif;
 }
 
+/* ── Note Field ── */
+.note-field {
+  margin-top: 12px;
+}
+
+.note-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.95rem;
+  color: #555;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.note-toggle input[type="checkbox"] {
+  width: auto;
+  cursor: pointer;
+}
+
+.note-field textarea {
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 12px;
+  font-size: 1rem;
+  line-height: 1.5;
+  resize: vertical;
+  font-family: 'Amiri', serif;
+  margin-top: 8px;
+}
+
 /* ── Footnote Field ── */
 .footnote-field h3 {
   margin-bottom: 8px;

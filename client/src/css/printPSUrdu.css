@@ -117,9 +117,9 @@ body {
 /* Footnote — matches original .right-margin-footer { padding-right: 2.8cm } */
 .footnote-container {
   position: absolute;
-  bottom: 2.2cm;
+  bottom: 1.75cm;
   left: 3.25cm;
-  right: 3cm;
+  right: 2cm;
   font-size: 14pt;
   font-family: Jameel;
   direction: rtl;
@@ -161,7 +161,6 @@ p {
     background-color: white;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
-    color-adjust: exact !important;
   }
 
   .letter-container {

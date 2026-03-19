@@ -17,6 +17,8 @@ export default function MainPage() {
   const [aiResponse, setAiResponse] = useState("");
   const [addressee, setAddressee] = useState("");
   const [footnote, setFootnote] = useState("");
+  const [note, setNote] = useState("");
+  const [showNote, setShowNote] = useState(false);
   const [isOcrLoading, setIsOcrLoading] = useState(false);
   const [isAiLoading, setIsAiLoading] = useState(false);
   const [originalFileName, setOriginalFileName] = useState("");
@@ -57,7 +59,7 @@ export default function MainPage() {
 
     setIsAiLoading(true);
     try {
-      const result = await processWithAI(ocrText, selectedPromptId);
+      const result = await processWithAI(ocrText, selectedPromptId, showNote ? note : "");
       if (result.success) {
         setAiResponse(result.response);
       } else {
@@ -79,6 +81,7 @@ export default function MainPage() {
         originalFileName,
         addressee,
         footnote,
+        ...(showNote && note ? { notes: note } : {}),
       });
       if (result.success) {
         alert("Letter saved successfully!");
@@ -147,6 +150,29 @@ export default function MainPage() {
               placeholder="e.g. Mr. John Smith,"
               dir={getDir(addressee)}
             />
+          </div>
+
+          <div className="note-field">
+            <label className="note-toggle">
+              <input
+                type="checkbox"
+                checked={showNote}
+                onChange={(e) => {
+                  setShowNote(e.target.checked);
+                  if (!e.target.checked) setNote("");
+                }}
+              />
+              Include Note
+            </label>
+            {showNote && (
+              <textarea
+                value={note}
+                onChange={(e) => setNote(e.target.value)}
+                placeholder="Enter additional note/context for AI processing..."
+                rows={3}
+                dir={getDir(note)}
+              />
+            )}
           </div>
 
           <ResponseEditor

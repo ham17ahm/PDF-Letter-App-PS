@@ -16,11 +16,11 @@ export async function getPrompts() {
   return res.json();
 }
 
-export async function processWithAI(ocrText, promptId) {
+export async function processWithAI(ocrText, promptId, note = "") {
   const res = await fetch(`${BASE_URL}/ai/process`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ ocrText, promptId }),
+    body: JSON.stringify({ ocrText, promptId, note }),
   });
   return res.json();
 }
