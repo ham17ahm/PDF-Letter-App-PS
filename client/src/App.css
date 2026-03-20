@@ -160,6 +160,39 @@ body {
 }
 
 /* ── Response Editor ── */
+.format-toolbar {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 6px;
+}
+
+.fmt-btn {
+  width: 28px;
+  height: 28px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  background: #f5f5f5;
+  cursor: pointer;
+  font-size: 0.9rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fmt-btn:hover {
+  background: #e0e0e0;
+  border-color: #aaa;
+}
+
+.fmt-bold {
+  font-weight: bold;
+}
+
+.fmt-italic {
+  font-style: italic;
+}
+
 .response-editor textarea {
   width: 100%;
   border: 1px solid #ddd;

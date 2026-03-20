@@ -1,28 +1,19 @@
 // ──────────────────────────────────────────────
-// ADD, REMOVE, OR EDIT PROMPTS HERE ONLY.
-// The dropdown on the frontend auto-updates.
+// PROMPT ORCHESTRATOR — do not add prompts here.
+// To add or edit a prompt, work in server/prompts/
+// Each .js file there is one prompt. This file
+// auto-loads all of them; the dropdown updates
+// automatically.
 // ──────────────────────────────────────────────
 
-const prompts = [
-  {
-    id: "summary-english",
-    label: "Summarise in English",
-    promptText:
-      "You are given the OCR text of a letter. Summarise it clearly in English, preserving all key details, names, dates, and action items.",
-  },
-  {
-    id: "summary-urdu",
-    label: "Summarise in Urdu",
-    promptText:
-      "You are given the OCR text of a letter. Provide a concise Urdu summary, preserving all key details, names, dates, and action items.",
-  },
-  {
-    id: "translate-urdu-to-english",
-    label: "Translate Urdu → English",
-    promptText:
-      "Translate the following Urdu text into fluent, natural English. Preserve the original meaning, tone, and formatting as closely as possible.",
-  },
-  // ← Just add a new object here for a new prompt
-];
+const fs = require("fs");
+const path = require("path");
+
+const promptsDir = path.join(__dirname, "../prompts");
+
+const prompts = fs
+  .readdirSync(promptsDir)
+  .filter((f) => f.endsWith(".js"))
+  .map((f) => require(path.join(promptsDir, f)));
 
 module.exports = prompts;

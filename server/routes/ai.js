@@ -22,7 +22,7 @@ router.post("/process", async (req, res) => {
         .json({ success: false, error: `Unknown prompt ID: ${promptId}` });
     }
 
-    const response = await processWithAI(prompt.promptText, ocrText, note);
+    const response = await processWithAI(prompt.buildPrompt(ocrText, note));
     res.json({ success: true, response });
   } catch (error) {
     console.error("AI processing error:", error.message);

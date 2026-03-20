@@ -13,15 +13,10 @@ function getClient() {
 /**
  * Send prompt + OCR text to the configured AI provider and return the response.
  */
-async function processWithAI(promptText, ocrText, note = "") {
+async function processWithAI(fullPrompt) {
   if (aiConfig.provider === "gemini") {
     const client = getClient();
     const model = client.getGenerativeModel({ model: aiConfig.model });
-
-    let fullPrompt = `${promptText}\n\n--- BEGIN OCR TEXT ---\n${ocrText}\n--- END OCR TEXT ---`;
-    if (note) {
-      fullPrompt += `\n\n--- ADDITIONAL NOTE ---\n${note}\n--- END NOTE ---`;
-    }
 
     console.log("\n========== GEMINI PROMPT ==========\n");
     console.log(fullPrompt);

@@ -183,6 +183,24 @@ export default function MainPage() {
 
           <div className="footnote-field">
             <h3>Footnote</h3>
+            <div className="format-toolbar">
+              <button
+                type="button"
+                className="fmt-btn"
+                title="Insert English footnote"
+                onClick={() => setFootnote("Copy PS Office")}
+              >
+                EN
+              </button>
+              <button
+                type="button"
+                className="fmt-btn"
+                title="Insert Urdu footnote"
+                onClick={() => setFootnote("نقل دفتر پی ایس اسلام آباد (یوکے)")}
+              >
+                UR
+              </button>
+            </div>
             <textarea
               value={footnote}
               onChange={(e) => setFootnote(e.target.value)}

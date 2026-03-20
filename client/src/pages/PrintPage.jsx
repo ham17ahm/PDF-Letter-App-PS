@@ -19,6 +19,8 @@ function formatText(text) {
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
+    .replace(/\*\*([\s\S]*?)\*\*/g, '<b>$1</b>')
+    .replace(/_([\s\S]*?)_/g, '<i>$1</i>')
     .replace(/\n\n+/g, '</p><p>')
     .replace(/\n/g, '<br>')
     .replace(/^/, '<p>')
@@ -213,25 +215,47 @@ export default function PrintPage() {
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: css }} />
-      <button
+      <div
         className="no-print"
-        onClick={() => window.print()}
         style={{
           position: "fixed",
           top: 10,
           right: 10,
           zIndex: 999,
-          padding: "8px 20px",
-          fontSize: "14px",
-          cursor: "pointer",
-          background: "#4361ee",
-          color: "#fff",
-          border: "none",
-          borderRadius: "4px",
+          display: "flex",
+          flexDirection: "column",
+          gap: "6px",
         }}
       >
-        Print
-      </button>
+        <button
+          onClick={() => window.print()}
+          style={{
+            padding: "8px 20px",
+            fontSize: "14px",
+            cursor: "pointer",
+            background: "#4361ee",
+            color: "#fff",
+            border: "none",
+            borderRadius: "4px",
+          }}
+        >
+          Print
+        </button>
+        <button
+          onClick={() => window.close()}
+          style={{
+            padding: "8px 20px",
+            fontSize: "14px",
+            cursor: "pointer",
+            background: "#e63946",
+            color: "#fff",
+            border: "none",
+            borderRadius: "4px",
+          }}
+        >
+          Close
+        </button>
+      </div>
 
       {type === "ps-english" && <PSEnglishTemplate {...props} />}
       {type === "hz-english" && <HZEnglishTemplate {...props} />}
