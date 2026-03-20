@@ -15,7 +15,7 @@ const letterSchema = new mongoose.Schema({
 
   // ── Optional fields (extend later as needed) ──
   tags: [{ type: String }],
-  notes: { type: String },
+  note: { type: String },
 }, {
   timestamps: true, // Auto-manages createdAt and updatedAt
 });

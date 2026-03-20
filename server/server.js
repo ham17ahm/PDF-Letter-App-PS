@@ -10,6 +10,7 @@ const ocrRoutes = require("./routes/ocr");
 const promptRoutes = require("./routes/prompts");
 const aiRoutes = require("./routes/ai");
 const letterRoutes = require("./routes/letters");
+const pdfRoutes = require("./routes/pdf");
 
 const app = express();
 
@@ -22,6 +23,7 @@ app.use("/api/ocr", ocrRoutes);
 app.use("/api/prompts", promptRoutes);
 app.use("/api/ai", aiRoutes);
 app.use("/api/letters", letterRoutes);
+app.use("/api/pdf", pdfRoutes);
 
 // Health check
 app.get("/api/health", (_req, res) => {

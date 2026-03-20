@@ -81,7 +81,7 @@ export default function MainPage() {
         originalFileName,
         addressee,
         footnote,
-        ...(showNote && note ? { notes: note } : {}),
+        ...(showNote && note ? { note } : {}),
       });
       if (result.success) {
         alert("Letter saved successfully!");
@@ -94,10 +94,8 @@ export default function MainPage() {
   }
 
   function handlePrint(type) {
-    localStorage.setItem(
-      "printData",
-      JSON.stringify({ text: aiResponse, addressee, footnote, fileName: originalFileName })
-    );
+    const printData = { text: aiResponse, addressee, footnote, fileName: originalFileName };
+    localStorage.setItem("printData", JSON.stringify(printData));
     window.open(`/print/${type}`, "_blank");
   }
 

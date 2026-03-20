@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { generatePdf } from "../services/api";
 import { useParams } from "react-router-dom";
 
 import printPSCss from "../css/printPS.css?raw";
@@ -195,6 +196,7 @@ function HZUrduTemplate({ text, addressee, footnote, date }) {
 export default function PrintPage() {
   const { type } = useParams();
   const [data, setData] = useState({ text: "", addressee: "", footnote: "" });
+  const [saving, setSaving] = useState(false);
 
   useEffect(() => {
     const stored = localStorage.getItem("printData");
@@ -254,6 +256,29 @@ export default function PrintPage() {
           }}
         >
           Close
+        </button>
+        <button
+          onClick={async () => {
+            setSaving(true);
+            try {
+              await generatePdf(type, data);
+            } finally {
+              setSaving(false);
+            }
+          }}
+          disabled={saving}
+          style={{
+            padding: "8px 20px",
+            fontSize: "14px",
+            cursor: saving ? "default" : "pointer",
+            background: "#2a9d8f",
+            color: "#fff",
+            border: "none",
+            borderRadius: "4px",
+            opacity: saving ? 0.7 : 1,
+          }}
+        >
+          {saving ? "Saving..." : "Save"}
         </button>
       </div>
 

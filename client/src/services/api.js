@@ -38,3 +38,12 @@ export async function getLetter(id) {
   const res = await fetch(`${BASE_URL}/letters/${id}`);
   return res.json();
 }
+
+export async function generatePdf(type, printData) {
+  const res = await fetch(`${BASE_URL}/pdf/generate`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ type, printData }),
+  });
+  return res.json();
+}
