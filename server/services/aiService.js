@@ -23,6 +23,10 @@ async function processWithAI(promptText, ocrText, note = "") {
       fullPrompt += `\n\n--- ADDITIONAL NOTE ---\n${note}\n--- END NOTE ---`;
     }
 
+    console.log("\n========== GEMINI PROMPT ==========\n");
+    console.log(fullPrompt);
+    console.log("\n====================================\n");
+
     const result = await model.generateContent({
       contents: [
         {

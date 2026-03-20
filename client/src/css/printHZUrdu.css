@@ -33,14 +33,16 @@ body {
 }
 
 .top_page {
-  padding: 5.5cm 3.5cm 2.5cm 4cm;
+  padding: 5.5cm 4.5cm 2.5cm 4.5cm;
   direction: rtl;
 }
 
 .date_location_combined {
   font-size: 11pt;
   font-family: Jameel;
-  margin-right: -1cm;
+  margin-right: -2cm;
+  display: inline-block;
+  text-align: center;
 }
 
 .date {
@@ -50,13 +52,12 @@ body {
 .title_fullname {
   word-spacing: -1.5px;
   text-indent: 1.6em;
-  margin-top: 4mm;
+  margin-top: 2mm;
 }
 
 .salam {
   word-spacing: -1.5px;
   text-align: center;
-  font-size: 22pt;
 }
 
 .main_text {
@@ -71,23 +72,23 @@ body {
 
 .wassalam {
   margin-bottom: -0.25em;
-  font-size: 22pt;
+  font-size: 20pt;
   font-family: Jameel3;
   font-style: italic;
   padding-right: 10em;
 }
 
 .greeting_end {
-  font-size: 22pt;
+  font-size: 20pt;
   padding-right: 10.25em;
   font-family: Jameel;
-  margin-bottom: 17mm;
+  margin-bottom: 14mm;
 }
 
 .signature_title {
-  font-size: 22pt;
+  font-size: 20pt;
   font-family: AlMajeed;
-  padding-right: 8em;
+  padding-right: 7.95em;
 }
 
 /* Footnote */
@@ -104,12 +105,10 @@ body {
 
 .text {
   font-family: Jameel;
-  font-size: 22pt;
+  font-size: 20pt;
 }
 
 p {
-  margin-top: 2mm;
-  margin-bottom: 2mm;
   text-indent: 1.6em;
 }
 
