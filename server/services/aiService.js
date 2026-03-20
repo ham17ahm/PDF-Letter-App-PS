@@ -11,7 +11,7 @@ function getClient() {
 }
 
 /**
- * Send prompt + OCR text to the configured AI provider and return the response.
+ * Send a fully assembled prompt to the configured AI provider and return the response.
  */
 async function processWithAI(fullPrompt) {
   if (aiConfig.provider === "gemini") {

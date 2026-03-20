@@ -24,7 +24,7 @@ async function generateAndSavePdf(type, printData) {
 
   const browser = await puppeteer.launch({
     executablePath: config.chromePath,
-    headless: true,
+    headless: "shell",
     args: ["--no-sandbox", "--disable-setuid-sandbox"],
   });
 

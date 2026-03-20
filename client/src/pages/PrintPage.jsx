@@ -261,7 +261,14 @@ export default function PrintPage() {
           onClick={async () => {
             setSaving(true);
             try {
-              await generatePdf(type, data);
+              const result = await generatePdf(type, data);
+              if (result.success) {
+                alert(`Saved: ${result.fileName}`);
+              } else {
+                alert("Save failed: " + result.error);
+              }
+            } catch {
+              alert("Failed to connect to server");
             } finally {
               setSaving(false);
             }
