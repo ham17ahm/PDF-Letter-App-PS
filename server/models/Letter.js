@@ -13,8 +13,6 @@ const letterSchema = new mongoose.Schema({
   // ── Metadata ──
   originalFileName: { type: String },
 
-  // ── Optional fields (extend later as needed) ──
-  tags: [{ type: String }],
   note: { type: String },
 }, {
   timestamps: true, // Auto-manages createdAt and updatedAt

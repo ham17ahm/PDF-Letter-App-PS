@@ -349,24 +349,6 @@ body {
   font-weight: 500;
 }
 
-/* ── Tags Field ── */
-.tags-field h3 {
-  margin-bottom: 8px;
-  font-size: 0.95rem;
-  color: #555;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.tags-field input {
-  width: 100%;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  padding: 10px 12px;
-  font-size: 0.9rem;
-  color: #333;
-}
-
 /* ── Status Message ── */
 .status-message {
   padding: 10px 14px;

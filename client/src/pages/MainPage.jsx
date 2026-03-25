@@ -22,7 +22,6 @@ export default function MainPage() {
   // ── Letter fields ──────────────────────────────────────────────────────────
   const [addressee, setAddressee]   = useState("");
   const [footnote, setFootnote]     = useState("");
-  const [tags, setTags]             = useState("");
   const [note, setNote]             = useState("");
   const [showNote, setShowNote]     = useState(false);
 
@@ -95,8 +94,7 @@ export default function MainPage() {
         originalFileName,
         addressee,
         footnote,
-        tags: tags.split(",").map((t) => t.trim()).filter(Boolean),
-        ...(showNote && note ? { note } : {}),
+...(showNote && note ? { note } : {}),
       });
       if (result.success) {
         setStatus({ type: "success", text: "Letter saved successfully." });
@@ -229,17 +227,7 @@ export default function MainPage() {
             />
           </div>
 
-          <div className="tags-field">
-            <h3>Tags</h3>
-            <input
-              type="text"
-              value={tags}
-              onChange={(e) => setTags(e.target.value)}
-              placeholder="e.g. complaint, uk, urgent (comma-separated)"
-            />
-          </div>
-
-          {status && (
+{status && (
             <div className={`status-message status-${status.type}`}>
               {status.text}
             </div>
