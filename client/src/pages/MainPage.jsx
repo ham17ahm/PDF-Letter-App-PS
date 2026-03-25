@@ -6,90 +6,105 @@ import OcrTextPanel from "../components/OcrTextPanel";
 import PromptSelector from "../components/PromptSelector";
 import ResponseEditor from "../components/ResponseEditor";
 import ActionButtons from "../components/ActionButtons";
+import useApi from "../hooks/useApi";
 import { uploadForOcr, processWithAI, saveLetter } from "../services/api";
 import { getDir } from "../utils/textDirection";
 
 export default function MainPage() {
   const navigate = useNavigate();
-  const [pdfFile, setPdfFile] = useState(null);
-  const [ocrText, setOcrText] = useState("");
+
+  // ── Content state ──────────────────────────────────────────────────────────
+  const [pdfFile, setPdfFile]               = useState(null);
+  const [ocrText, setOcrText]               = useState("");
   const [selectedPromptId, setSelectedPromptId] = useState(null);
-  const [aiResponse, setAiResponse] = useState("");
-  const [addressee, setAddressee] = useState("");
-  const [footnote, setFootnote] = useState("");
-  const [note, setNote] = useState("");
-  const [showNote, setShowNote] = useState(false);
-  const [isOcrLoading, setIsOcrLoading] = useState(false);
-  const [isAiLoading, setIsAiLoading] = useState(false);
+  const [aiResponse, setAiResponse]         = useState("");
+
+  // ── Letter fields ──────────────────────────────────────────────────────────
+  const [addressee, setAddressee]   = useState("");
+  const [footnote, setFootnote]     = useState("");
+  const [tags, setTags]             = useState("");
+  const [note, setNote]             = useState("");
+  const [showNote, setShowNote]     = useState(false);
+
+  // ── Metadata ───────────────────────────────────────────────────────────────
   const [originalFileName, setOriginalFileName] = useState("");
+
+  // ── Inline status message ──────────────────────────────────────────────────
+  const [status, setStatus] = useState(null); // { type: 'success' | 'error', text: '' }
+
+  // ── API hooks (manage loading state automatically) ─────────────────────────
+  const ocr  = useApi(uploadForOcr);
+  const ai   = useApi(processWithAI);
+  const save = useApi(saveLetter);
+
+  // ── Handlers ───────────────────────────────────────────────────────────────
 
   function handleFileSelected(file) {
     setPdfFile(file);
     setOriginalFileName(file.name);
     setOcrText("");
     setAiResponse("");
+    setStatus(null);
   }
 
   async function handleExtractText() {
     if (!pdfFile) {
-      alert("Please upload a PDF first");
+      setStatus({ type: "error", text: "Please upload a PDF first." });
       return;
     }
-
-    setIsOcrLoading(true);
+    setStatus(null);
     try {
-      const result = await uploadForOcr(pdfFile);
+      const result = await ocr.execute(pdfFile);
       if (result.success) {
         setOcrText(result.text);
+        setStatus({ type: "success", text: "Text extracted successfully. You can edit it before processing." });
       } else {
-        alert("OCR failed: " + result.error);
+        setStatus({ type: "error", text: "OCR failed: " + result.error });
       }
     } catch {
-      alert("Failed to connect to server");
-    } finally {
-      setIsOcrLoading(false);
+      setStatus({ type: "error", text: "Failed to connect to server." });
     }
   }
 
   async function handleProcess() {
     if (!ocrText || !selectedPromptId) {
-      alert("Please upload a PDF and select a prompt first");
+      setStatus({ type: "error", text: "Please extract text and select a prompt first." });
       return;
     }
-
-    setIsAiLoading(true);
+    setStatus(null);
     try {
-      const result = await processWithAI(ocrText, selectedPromptId, showNote ? note : "");
+      const result = await ai.execute(ocrText, selectedPromptId, showNote ? note : "");
       if (result.success) {
         setAiResponse(result.response);
+        setStatus({ type: "success", text: "Processing complete." });
       } else {
-        alert("AI processing failed: " + result.error);
+        setStatus({ type: "error", text: "AI processing failed: " + result.error });
       }
     } catch {
-      alert("Failed to connect to server");
-    } finally {
-      setIsAiLoading(false);
+      setStatus({ type: "error", text: "Failed to connect to server." });
     }
   }
 
   async function handleSave() {
+    setStatus(null);
     try {
-      const result = await saveLetter({
-        originalText: ocrText,
-        processedText: aiResponse,
-        promptUsed: selectedPromptId,
+      const result = await save.execute({
+        originalText:    ocrText,
+        processedText:   aiResponse,
+        promptUsed:      selectedPromptId,
         originalFileName,
         addressee,
         footnote,
+        tags: tags.split(",").map((t) => t.trim()).filter(Boolean),
         ...(showNote && note ? { note } : {}),
       });
       if (result.success) {
-        alert("Letter saved successfully!");
+        setStatus({ type: "success", text: "Letter saved successfully." });
       } else {
-        alert("Save failed: " + result.error);
+        setStatus({ type: "error", text: "Save failed: " + result.error });
       }
     } catch {
-      alert("Failed to connect to server");
+      setStatus({ type: "error", text: "Failed to connect to server." });
     }
   }
 
@@ -98,6 +113,8 @@ export default function MainPage() {
     localStorage.setItem("printData", JSON.stringify(printData));
     window.open(`/print/${type}`, "_blank");
   }
+
+  // ── Render ─────────────────────────────────────────────────────────────────
 
   return (
     <div className="main-page">
@@ -109,14 +126,14 @@ export default function MainPage() {
         <div className="header-actions">
           <FileUploadButton
             onFileSelected={handleFileSelected}
-            isLoading={false}
+            isLoading={ocr.isLoading}
           />
           <button
             className="btn btn-extract"
             onClick={handleExtractText}
-            disabled={!pdfFile || isOcrLoading}
+            disabled={!pdfFile || ocr.isLoading}
           >
-            {isOcrLoading ? "Extracting..." : "Extract Text"}
+            {ocr.isLoading ? "Extracting..." : "Extract Text"}
           </button>
         </div>
       </header>
@@ -127,16 +144,20 @@ export default function MainPage() {
         </div>
 
         <div className="panel panel-right">
-          <OcrTextPanel text={ocrText} isLoading={isOcrLoading} />
+          <OcrTextPanel
+            text={ocrText}
+            onChange={setOcrText}
+            isLoading={ocr.isLoading}
+          />
 
           <PromptSelector onSelect={setSelectedPromptId} />
 
           <button
             className="btn btn-primary"
             onClick={handleProcess}
-            disabled={!ocrText || !selectedPromptId || isAiLoading}
+            disabled={!ocrText || !selectedPromptId || ai.isLoading}
           >
-            {isAiLoading ? "Processing..." : "Process"}
+            {ai.isLoading ? "Processing..." : "Process"}
           </button>
 
           <div className="addressee-field">
@@ -176,7 +197,7 @@ export default function MainPage() {
           <ResponseEditor
             value={aiResponse}
             onChange={setAiResponse}
-            isLoading={isAiLoading}
+            isLoading={ai.isLoading}
           />
 
           <div className="footnote-field">
@@ -207,6 +228,22 @@ export default function MainPage() {
               dir={getDir(footnote)}
             />
           </div>
+
+          <div className="tags-field">
+            <h3>Tags</h3>
+            <input
+              type="text"
+              value={tags}
+              onChange={(e) => setTags(e.target.value)}
+              placeholder="e.g. complaint, uk, urgent (comma-separated)"
+            />
+          </div>
+
+          {status && (
+            <div className={`status-message status-${status.type}`}>
+              {status.text}
+            </div>
+          )}
 
           <ActionButtons
             onSave={handleSave}

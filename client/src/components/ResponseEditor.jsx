@@ -60,11 +60,9 @@ export default function ResponseEditor({ value, onChange, isLoading }) {
             rows={12}
             dir={getDir(value)}
           />
-          {overLimit && (
-            <div className="word-limit-warning">
-              Word limit exceeded — {wordCount} / {WORD_LIMIT} words
-            </div>
-          )}
+          <div className={overLimit ? "word-limit-warning" : "word-count"}>
+            {wordCount} / {WORD_LIMIT} words{overLimit ? " — limit exceeded" : ""}
+          </div>
         </>
       )}
     </div>

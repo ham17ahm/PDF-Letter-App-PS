@@ -148,15 +148,15 @@ body {
 }
 
 .ocr-text-content {
+  width: 100%;
   background: #fff;
   border: 1px solid #ddd;
   border-radius: 4px;
   padding: 12px;
-  max-height: 200px;
-  overflow-y: auto;
-  white-space: pre-wrap;
   font-size: 0.9rem;
   line-height: 1.5;
+  resize: vertical;
+  font-family: 'Amiri', serif;
 }
 
 /* ── Response Editor ── */
@@ -335,12 +335,56 @@ body {
   font-family: 'Amiri', serif;
 }
 
-/* ── Word Limit Warning ── */
+/* ── Word Count / Limit Warning ── */
+.word-count {
+  margin-top: 6px;
+  font-size: 0.85rem;
+  color: #999;
+}
+
 .word-limit-warning {
   margin-top: 6px;
   font-size: 0.85rem;
   color: #c0392b;
   font-weight: 500;
+}
+
+/* ── Tags Field ── */
+.tags-field h3 {
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+  color: #555;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.tags-field input {
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 10px 12px;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+/* ── Status Message ── */
+.status-message {
+  padding: 10px 14px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.status-success {
+  background: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.status-error {
+  background: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
 }
 
 /* ── Loading ── */
