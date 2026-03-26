@@ -46,6 +46,15 @@
   background: rgba(255, 255, 255, 0.1);
 }
 
+.btn-back--teal {
+  border-color: #2ec4b6;
+  color: #2ec4b6;
+}
+
+.btn-back--teal:hover {
+  background: rgba(46, 196, 182, 0.15);
+}
+
 .header-actions {
   display: flex;
   gap: 10px;
@@ -445,13 +454,33 @@ body {
 }
 
 /* ── Archive column widths (percentages of table width — adjust freely) ── */
-.archive-col-num       { width: 4%;  color: #999; }
-.archive-col-date      { width: 9%;  white-space: nowrap; }
-.archive-col-addressee { width: 13%; }
-.archive-col-text      { width: 35%; color: #333; }
-.archive-col-footnote  { width: 15%; color: #555; }
-.archive-col-note      { width: 15%; color: #555; }
-.archive-col-action    { width: 9%;  text-align: right; }
+.archive-col-num {
+  width: 3%;
+  color: #999;
+}
+.archive-col-date {
+  width: 9%;
+  white-space: nowrap;
+}
+.archive-col-addressee {
+  width: 13%;
+}
+.archive-col-text {
+  width: 37%;
+  color: #333;
+}
+.archive-col-note {
+  width: 18%;
+  color: #555;
+}
+.archive-col-footnote {
+  width: 10%;
+  color: #555;
+}
+.archive-col-action {
+  width: 10%;
+  text-align: right;
+}
 
 .btn-delete {
   background: transparent;

@@ -29,8 +29,8 @@ function LetterRow({ letter, index, onDelete }) {
       <td className="archive-col-date">{formatDate(letter.createdAt)}</td>
       <td className="archive-col-addressee">{letter.addressee || "—"}</td>
       <td className="archive-col-text">{truncate(letter.processedText)}</td>
-      <td className="archive-col-footnote">{truncate(letter.footnote)}</td>
       <td className="archive-col-note">{truncate(letter.note)}</td>
+      <td className="archive-col-footnote">{truncate(letter.footnote)}</td>
       <td className="archive-col-action">
         <button className="btn-delete" onClick={handleDelete}>
           Delete
@@ -48,9 +48,14 @@ export default function ArchivePage() {
     <div className="archive-page">
       <div className="app-header">
         <h1>Archive</h1>
-        <button className="btn-back" onClick={() => navigate("/")}>
-          Back
-        </button>
+        <div className="header-actions">
+          <button className="btn-back" onClick={() => navigate("/")}>
+            Back
+          </button>
+          <button className="btn-back btn-back--teal" onClick={() => navigate("/main")}>
+            Letter Generator
+          </button>
+        </div>
       </div>
 
       <div className="archive-body">
@@ -71,8 +76,8 @@ export default function ArchivePage() {
                 <th className="archive-col-date">Date</th>
                 <th className="archive-col-addressee">Addressee</th>
                 <th className="archive-col-text">Processed Text</th>
-                <th className="archive-col-footnote">Footnote</th>
                 <th className="archive-col-note">Note</th>
+                <th className="archive-col-footnote">Footnote</th>
                 <th className="archive-col-action"></th>
               </tr>
             </thead>
