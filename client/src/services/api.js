@@ -34,8 +34,18 @@ export async function saveLetter(letterData) {
   return res.json();
 }
 
+export async function getLetters() {
+  const res = await fetch(`${BASE_URL}/letters`);
+  return res.json();
+}
+
 export async function getLetter(id) {
   const res = await fetch(`${BASE_URL}/letters/${id}`);
+  return res.json();
+}
+
+export async function deleteLetter(id) {
+  const res = await fetch(`${BASE_URL}/letters/${id}`, { method: "DELETE" });
   return res.json();
 }
 

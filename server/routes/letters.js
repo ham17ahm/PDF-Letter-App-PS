@@ -33,6 +33,36 @@ router.post("/", async (req, res) => {
   }
 });
 
+// GET /api/letters — 20 most recent (summary fields only)
+router.get("/", async (req, res) => {
+  try {
+    const letters = await Letter.find(
+      {},
+      { originalText: 0 }
+    )
+      .sort({ createdAt: -1 })
+      .limit(20);
+    res.json({ success: true, letters });
+  } catch (error) {
+    console.error("List letters error:", error.message);
+    res.status(500).json({ success: false, error: "Failed to retrieve letters" });
+  }
+});
+
+// DELETE /api/letters/:id — Delete a letter
+router.delete("/:id", async (req, res) => {
+  try {
+    const letter = await Letter.findByIdAndDelete(req.params.id);
+    if (!letter) {
+      return res.status(404).json({ success: false, error: "Letter not found" });
+    }
+    res.json({ success: true });
+  } catch (error) {
+    console.error("Delete letter error:", error.message);
+    res.status(500).json({ success: false, error: "Failed to delete letter" });
+  }
+});
+
 // GET /api/letters/:id — Retrieve a letter by ID
 router.get("/:id", async (req, res) => {
   try {

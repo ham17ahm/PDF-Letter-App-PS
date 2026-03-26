@@ -20,6 +20,11 @@
   margin-bottom: 12px;
 }
 
+.landing-actions {
+  display: flex;
+  gap: 16px;
+}
+
 .btn-large {
   padding: 16px 40px;
   font-size: 1.15rem;
@@ -46,6 +51,10 @@
   gap: 10px;
 }
 
+.header-archive-btn {
+  margin-left: 14px;
+}
+
 .btn-extract {
   background: #e07c24;
   color: #fff;
@@ -63,7 +72,8 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   background: #f5f5f5;
   color: #333;
 }
@@ -156,7 +166,7 @@ body {
   font-size: 0.9rem;
   line-height: 1.5;
   resize: vertical;
-  font-family: 'Amiri', serif;
+  font-family: "Amiri", serif;
 }
 
 /* ── Response Editor ── */
@@ -201,7 +211,7 @@ body {
   font-size: 1rem;
   line-height: 1.5;
   resize: vertical;
-  font-family: 'Amiri', serif;
+  font-family: "Amiri", serif;
 }
 
 /* ── Buttons ── */
@@ -278,7 +288,7 @@ body {
   border-radius: 4px;
   padding: 10px 12px;
   font-size: 1rem;
-  font-family: 'Amiri', serif;
+  font-family: "Amiri", serif;
 }
 
 /* ── Note Field ── */
@@ -311,7 +321,7 @@ body {
   font-size: 1rem;
   line-height: 1.5;
   resize: vertical;
-  font-family: 'Amiri', serif;
+  font-family: "Amiri", serif;
   margin-top: 8px;
 }
 
@@ -332,7 +342,7 @@ body {
   font-size: 1rem;
   line-height: 1.5;
   resize: vertical;
-  font-family: 'Amiri', serif;
+  font-family: "Amiri", serif;
 }
 
 /* ── Word Count / Limit Warning ── */
@@ -374,6 +384,91 @@ body {
   color: #4361ee;
   font-style: italic;
   padding: 12px 0;
+}
+
+/* ── Archive Page ── */
+.archive-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: #f5f5f5;
+}
+
+.archive-body {
+  padding: 24px;
+  overflow-x: auto;
+}
+
+.archive-status {
+  color: #666;
+  font-size: 0.95rem;
+  padding: 12px 0;
+}
+
+.archive-status--error {
+  color: #721c24;
+}
+
+.archive-table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  font-size: 0.9rem;
+}
+
+.archive-table th,
+.archive-table td {
+  text-align: left;
+  padding: 11px 14px;
+  border-bottom: 1px solid #eee;
+}
+
+.archive-table th {
+  background: #1a1a2e;
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.archive-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.archive-table tbody tr:hover {
+  background: #f9f9f9;
+}
+
+/* ── Archive column widths (percentages of table width — adjust freely) ── */
+.archive-col-num       { width: 4%;  color: #999; }
+.archive-col-date      { width: 9%;  white-space: nowrap; }
+.archive-col-addressee { width: 13%; }
+.archive-col-text      { width: 35%; color: #333; }
+.archive-col-footnote  { width: 15%; color: #555; }
+.archive-col-note      { width: 15%; color: #555; }
+.archive-col-action    { width: 9%;  text-align: right; }
+
+.btn-delete {
+  background: transparent;
+  color: #c0392b;
+  border: 1px solid #c0392b;
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition:
+    background 0.15s,
+    color 0.15s;
+}
+
+.btn-delete:hover {
+  background: #c0392b;
+  color: #fff;
 }
 
 /* ── Print media ── */

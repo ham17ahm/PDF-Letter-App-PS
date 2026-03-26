@@ -133,6 +133,12 @@ export default function MainPage() {
           >
             {ocr.isLoading ? "Extracting..." : "Extract Text"}
           </button>
+          <button
+            className="btn btn-secondary header-archive-btn"
+            onClick={() => navigate("/archive")}
+          >
+            Archive
+          </button>
         </div>
       </header>
 
