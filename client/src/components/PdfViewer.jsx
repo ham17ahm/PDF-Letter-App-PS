@@ -10,17 +10,29 @@ const SCALE = 2;
 
 function PdfPage({ page }) {
   const canvasRef = useRef(null);
+  const renderTaskRef = useRef(null);
 
   useEffect(() => {
+    if (renderTaskRef.current) {
+      renderTaskRef.current.cancel();
+    }
+
     const viewport = page.getViewport({ scale: SCALE });
     const canvas = canvasRef.current;
     canvas.width = viewport.width;
     canvas.height = viewport.height;
 
-    page.render({
+    const task = page.render({
       canvasContext: canvas.getContext("2d"),
       viewport,
     });
+    renderTaskRef.current = task;
+
+    task.promise.catch((err) => {
+      if (err.name !== "RenderingCancelledException") throw err;
+    });
+
+    return () => task.cancel();
   }, [page]);
 
   return <canvas ref={canvasRef} className="pdf-page-canvas" />;

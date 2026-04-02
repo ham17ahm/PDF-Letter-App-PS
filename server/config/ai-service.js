@@ -23,6 +23,6 @@ module.exports = {
   provider: "gemini",
   model: "gemini-2.5-flash",
   apiKey: process.env.AI_API_KEY,
-  maxTokens: 2000,
+  maxTokens: 8192,
   temperature: 0.3,
 };

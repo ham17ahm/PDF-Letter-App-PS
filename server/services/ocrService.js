@@ -6,33 +6,50 @@ const client = new vision.ImageAnnotatorClient({
 
 /**
  * Extract text from a PDF buffer using Google Cloud Vision.
- * Vision API supports PDF natively via asyncBatchAnnotateFiles,
- * but for simplicity we use document text detection on the raw buffer.
+ * The Vision API limits batchAnnotateFiles to 5 pages per request,
+ * so we send multiple batched requests to handle longer PDFs.
  */
 async function extractTextFromPdf(fileBuffer) {
-  const request = {
-    requests: [
-      {
-        inputConfig: {
-          content: fileBuffer.toString("base64"),
-          mimeType: "application/pdf",
+  const base64Content = fileBuffer.toString("base64");
+  const allPages = [];
+  const BATCH_SIZE = 5;
+  let startPage = 1;
+
+  while (true) {
+    const pages = Array.from({ length: BATCH_SIZE }, (_, i) => startPage + i);
+
+    const request = {
+      requests: [
+        {
+          inputConfig: {
+            content: base64Content,
+            mimeType: "application/pdf",
+          },
+          features: [{ type: "DOCUMENT_TEXT_DETECTION" }],
+          pages: pages,
         },
-        features: [{ type: "DOCUMENT_TEXT_DETECTION" }],
-      },
-    ],
-  };
+      ],
+    };
 
-  const [result] = await client.batchAnnotateFiles(request);
-  const responses = result.responses[0].responses;
+    const [result] = await client.batchAnnotateFiles(request);
+    const responses = result.responses[0].responses;
 
-  const fullText = responses
-    .map((page, i) => {
-      const text = page.fullTextAnnotation?.text || "";
-      return `── Page ${i + 1} ──\n${text}`;
-    })
-    .join("\n\n");
+    if (!responses || responses.length === 0) break;
 
-  return fullText;
+    let batchHadText = false;
+    for (let i = 0; i < responses.length; i++) {
+      const text = responses[i].fullTextAnnotation?.text || "";
+      if (text) {
+        allPages.push(`── Page ${startPage + i} ──\n${text}`);
+        batchHadText = true;
+      }
+    }
+
+    if (!batchHadText || responses.length < BATCH_SIZE) break;
+    startPage += BATCH_SIZE;
+  }
+
+  return allPages.join("\n\n");
 }
 
 module.exports = { extractTextFromPdf };
