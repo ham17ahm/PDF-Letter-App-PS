@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { getLetter } from "../services/api";
 
 function formatDate(iso) {
   if (!iso) return "—";
@@ -26,23 +27,27 @@ export default function LetterViewPage() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const controller = new AbortController();
+    // "cancelled" flag stops state updates if the component unmounts before
+    // the fetch finishes (e.g. navigating away, or React Strict Mode cleanup).
+    let cancelled = false;
 
-    fetch(`/api/letters/${id}`, { signal: controller.signal })
-      .then((res) => res.json())
+    getLetter(id)
       .then((data) => {
+        if (cancelled) return;
         if (data && data.letter && data.letter._id) {
           setLetter(data.letter);
         } else {
           setError(data.error || "Record not found.");
         }
       })
-      .catch((err) => {
-        if (err.name !== "AbortError") setError("Failed to load record.");
+      .catch(() => {
+        if (!cancelled) setError("Failed to load record.");
       })
-      .finally(() => setLoading(false));
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
 
-    return () => controller.abort();
+    return () => { cancelled = true; };
   }, [id]);
 
   if (loading) {
