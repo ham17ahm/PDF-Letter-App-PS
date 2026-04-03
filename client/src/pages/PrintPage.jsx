@@ -69,7 +69,21 @@ export default function PrintPage() {
 
   const css      = cssMap[type] || "";
   const Template = templateMap[type];
-  const props    = {
+
+  // Guard: show a clear error if the URL has an unrecognised type.
+  if (!Template) {
+    return (
+      <div style={{ padding: "40px", fontFamily: "sans-serif", color: "#c0392b" }}>
+        <h2>Unknown letter type: &ldquo;{type}&rdquo;</h2>
+        <p>Valid types are: {Object.keys(templateMap).join(", ")}</p>
+        <button onClick={() => window.close()} style={{ marginTop: "12px", ...btnBase, background: "#e63946" }}>
+          Close
+        </button>
+      </div>
+    );
+  }
+
+  const props = {
     text:      data.text,
     addressee: data.addressee,
     footnote:  data.footnote,
@@ -99,7 +113,7 @@ export default function PrintPage() {
         </button>
       </div>
 
-      {Template && <Template {...props} />}
+      <Template {...props} />
     </>
   );
 }

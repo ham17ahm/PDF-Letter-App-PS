@@ -32,8 +32,14 @@ async function extractTextFromPdf(fileBuffer) {
     };
 
     const [result] = await client.batchAnnotateFiles(request);
-    const responses = result.responses[0].responses;
 
+    // Guard against unexpected empty or error responses from the Vision API.
+    if (!result?.responses?.[0]) break;
+    if (result.responses[0].error) {
+      throw new Error(`Vision API error: ${result.responses[0].error.message}`);
+    }
+
+    const responses = result.responses[0].responses;
     if (!responses || responses.length === 0) break;
 
     let batchHadText = false;

@@ -23,6 +23,10 @@ function LetterRow({ letter, index, onDelete }) {
     if (!ok) alert("Delete failed. Please try again.");
   }
 
+  function handleView() {
+    window.open(`/archive/${letter._id}`, "_blank");
+  }
+
   return (
     <tr>
       <td className="archive-col-num">{index + 1}</td>
@@ -32,6 +36,9 @@ function LetterRow({ letter, index, onDelete }) {
       <td className="archive-col-note">{truncate(letter.note)}</td>
       <td className="archive-col-footnote">{truncate(letter.footnote)}</td>
       <td className="archive-col-action">
+        <button className="btn-view" onClick={handleView}>
+          View
+        </button>
         <button className="btn-delete" onClick={handleDelete}>
           Delete
         </button>
@@ -42,7 +49,7 @@ function LetterRow({ letter, index, onDelete }) {
 
 export default function ArchivePage() {
   const navigate = useNavigate();
-  const { letters, loading, error, remove } = useLetters();
+  const { letters, loading, error, remove, page, totalPages, total, goToPage } = useLetters();
 
   return (
     <div className="archive-page">
@@ -69,29 +76,55 @@ export default function ArchivePage() {
         )}
 
         {!loading && !error && letters.length > 0 && (
-          <table className="archive-table">
-            <thead>
-              <tr>
-                <th className="archive-col-num">#</th>
-                <th className="archive-col-date">Date</th>
-                <th className="archive-col-addressee">Addressee</th>
-                <th className="archive-col-text">Processed Text</th>
-                <th className="archive-col-note">Note</th>
-                <th className="archive-col-footnote">Footnote</th>
-                <th className="archive-col-action"></th>
-              </tr>
-            </thead>
-            <tbody>
-              {letters.map((letter, i) => (
-                <LetterRow
-                  key={letter._id}
-                  letter={letter}
-                  index={i}
-                  onDelete={remove}
-                />
-              ))}
-            </tbody>
-          </table>
+          <>
+            <table className="archive-table">
+              <thead>
+                <tr>
+                  <th className="archive-col-num">#</th>
+                  <th className="archive-col-date">Date</th>
+                  <th className="archive-col-addressee">Addressee</th>
+                  <th className="archive-col-text">Processed Text</th>
+                  <th className="archive-col-note">Note</th>
+                  <th className="archive-col-footnote">Footnote</th>
+                  <th className="archive-col-action"></th>
+                </tr>
+              </thead>
+              <tbody>
+                {letters.map((letter, i) => (
+                  <LetterRow
+                    key={letter._id}
+                    letter={letter}
+                    index={(page - 1) * 20 + i}
+                    onDelete={remove}
+                  />
+                ))}
+              </tbody>
+            </table>
+
+            {/* Pagination controls */}
+            {totalPages > 1 && (
+              <div className="archive-pagination">
+                <button
+                  className="archive-page-btn"
+                  onClick={() => goToPage(page - 1)}
+                  disabled={page <= 1}
+                >
+                  ← Prev
+                </button>
+                <span className="archive-page-info">
+                  Page {page} of {totalPages}
+                  <span className="archive-page-total"> ({total} records)</span>
+                </span>
+                <button
+                  className="archive-page-btn"
+                  onClick={() => goToPage(page + 1)}
+                  disabled={page >= totalPages}
+                >
+                  Next →
+                </button>
+              </div>
+            )}
+          </>
         )}
       </div>
     </div>

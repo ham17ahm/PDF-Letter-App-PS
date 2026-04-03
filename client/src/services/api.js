@@ -34,8 +34,8 @@ export async function saveLetter(letterData) {
   return res.json();
 }
 
-export async function getLetters() {
-  const res = await fetch(`${BASE_URL}/letters`);
+export async function getLetters(page = 1, limit = 20, signal) {
+  const res = await fetch(`${BASE_URL}/letters?page=${page}&limit=${limit}`, { signal });
   return res.json();
 }
 
