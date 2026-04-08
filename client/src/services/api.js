@@ -49,6 +49,15 @@ export async function deleteLetter(id) {
   return res.json();
 }
 
+export async function updateLetter(id, data) {
+  const res = await fetch(`${BASE_URL}/letters/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
+  return res.json();
+}
+
 export async function generatePdf(type, printData) {
   const res = await fetch(`${BASE_URL}/pdf/generate`, {
     method: "POST",

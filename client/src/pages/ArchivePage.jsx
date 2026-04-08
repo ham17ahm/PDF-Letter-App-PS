@@ -17,6 +17,8 @@ function truncate(str) {
 }
 
 function LetterRow({ letter, index, onDelete }) {
+  const navigate = useNavigate();
+
   async function handleDelete() {
     if (!window.confirm("Delete this record permanently?")) return;
     const ok = await onDelete(letter._id);
@@ -25,6 +27,10 @@ function LetterRow({ letter, index, onDelete }) {
 
   function handleView() {
     window.open(`/archive/${letter._id}`, "_blank");
+  }
+
+  function handleEdit() {
+    navigate(`/archive/${letter._id}/edit`);
   }
 
   return (
@@ -38,6 +44,9 @@ function LetterRow({ letter, index, onDelete }) {
       <td className="archive-col-action">
         <button className="btn-view" onClick={handleView}>
           View
+        </button>
+        <button className="btn-edit" onClick={handleEdit}>
+          Edit
         </button>
         <button className="btn-delete" onClick={handleDelete}>
           Delete

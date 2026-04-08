@@ -4,6 +4,7 @@ import MainPage from "./pages/MainPage";
 import PrintPage from "./pages/PrintPage";
 import ArchivePage from "./pages/ArchivePage";
 import LetterViewPage from "./pages/LetterViewPage";
+import EditPage from "./pages/EditPage";
 import "./App.css";
 
 export default function App() {
@@ -13,6 +14,7 @@ export default function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/main" element={<MainPage />} />
         <Route path="/archive" element={<ArchivePage />} />
+        <Route path="/archive/:id/edit" element={<EditPage />} />
         <Route path="/archive/:id" element={<LetterViewPage />} />
         <Route path="/print/:type" element={<PrintPage />} />
       </Routes>

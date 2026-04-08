@@ -83,6 +83,35 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
+// PUT /api/letters/:id — Update a letter's editable fields
+router.put("/:id", async (req, res) => {
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    return res.status(400).json({ success: false, error: "Invalid record ID" });
+  }
+  try {
+    const { addressee, processedText, note, footnote } = req.body;
+
+    if (!processedText || !processedText.trim()) {
+      return res.status(400).json({ success: false, error: "processedText cannot be empty" });
+    }
+
+    const letter = await Letter.findByIdAndUpdate(
+      req.params.id,
+      { addressee, processedText, note, footnote },
+      { new: true, runValidators: true }
+    );
+
+    if (!letter) {
+      return res.status(404).json({ success: false, error: "Letter not found" });
+    }
+
+    res.json({ success: true, letter });
+  } catch (error) {
+    console.error("Update letter error:", error.message);
+    res.status(500).json({ success: false, error: "Failed to update letter" });
+  }
+});
+
 // GET /api/letters/:id — Retrieve a letter by ID
 router.get("/:id", async (req, res) => {
   // Validate the ID format before hitting the database.

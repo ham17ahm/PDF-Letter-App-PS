@@ -466,11 +466,11 @@ body {
   width: 13%;
 }
 .archive-col-text {
-  width: 34%;
+  width: 30%;
   color: #333;
 }
 .archive-col-note {
-  width: 16%;
+  width: 13%;
   color: #555;
 }
 .archive-col-footnote {
@@ -478,7 +478,7 @@ body {
   color: #555;
 }
 .archive-col-action {
-  width: 14%;
+  width: 20%;
   text-align: right;
   white-space: nowrap;
 }
@@ -557,6 +557,25 @@ body {
 
 .btn-view:hover {
   background: #2ec4b6;
+  color: #fff;
+}
+
+.btn-edit {
+  background: transparent;
+  color: #e07c24;
+  border: 1px solid #e07c24;
+  border-radius: 4px;
+  padding: 5px 12px;
+  font-size: 0.82rem;
+  cursor: pointer;
+  margin-right: 6px;
+  transition:
+    background 0.15s,
+    color 0.15s;
+}
+
+.btn-edit:hover {
+  background: #e07c24;
   color: #fff;
 }
 
@@ -736,6 +755,74 @@ body {
   color: #555;
   font-size: 0.88rem;
   border-left: 4px solid #ccc;
+}
+
+/* ── Edit Page form sections ── */
+.ep-section-body {
+  padding: 20px;
+  background: #fff;
+}
+
+.ep-input {
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 10px 12px;
+  font-size: 1rem;
+  font-family: "Amiri", serif;
+  color: #1a1a2e;
+}
+
+.ep-input:focus {
+  outline: none;
+  border-color: #2ec4b6;
+  box-shadow: 0 0 0 2px rgba(46, 196, 182, 0.15);
+}
+
+.ep-textarea {
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 12px;
+  font-size: 1rem;
+  line-height: 1.5;
+  resize: vertical;
+  font-family: "Amiri", serif;
+  margin-top: 8px;
+  color: #1a1a2e;
+}
+
+.ep-textarea:focus {
+  outline: none;
+  border-color: #2ec4b6;
+  box-shadow: 0 0 0 2px rgba(46, 196, 182, 0.15);
+}
+
+/* Hide the redundant "AI Response" heading inside the edit form */
+.ep-response-body .response-editor h3 {
+  display: none;
+}
+
+/* Remove default top margin on response-editor when nested in ep-section-body */
+.ep-response-body .response-editor {
+  margin-top: 0;
+}
+
+.ep-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding-bottom: 16px;
+}
+
+.ep-save-btn {
+  padding: 10px 28px;
+  font-size: 1rem;
+}
+
+.ep-cancel-btn {
+  padding: 10px 20px;
+  font-size: 1rem;
 }
 
 /* ── Print media ── */
