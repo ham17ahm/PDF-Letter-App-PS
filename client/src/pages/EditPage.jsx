@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { getLetter, updateLetter } from "../services/api";
 import ResponseEditor from "../components/ResponseEditor";
 import { getDir } from "../utils/textDirection";
+import { LETTER_TYPES } from "../config/letterTypes";
 
 function formatDate(iso) {
   if (!iso) return "—";
@@ -91,6 +92,17 @@ export default function EditPage() {
 
   function handleCancel() {
     navigate("/archive");
+  }
+
+  function handlePrint(type) {
+    const printData = {
+      text: processedText,
+      addressee,
+      footnote,
+      fileName: letter.originalFileName || "",
+    };
+    localStorage.setItem("printData", JSON.stringify(printData));
+    window.open(`/print/${type}`, "_blank");
   }
 
   // ── Loading state ──
@@ -271,6 +283,16 @@ export default function EditPage() {
           >
             {saving ? "Saving…" : "Save Changes"}
           </button>
+          {LETTER_TYPES.map(({ id: typeId, label }) => (
+            <button
+              key={typeId}
+              className="btn btn-print"
+              onClick={() => handlePrint(typeId)}
+              disabled={!processedText || saving}
+            >
+              Print {label}
+            </button>
+          ))}
           <button
             className="btn btn-secondary ep-cancel-btn"
             onClick={handleCancel}
