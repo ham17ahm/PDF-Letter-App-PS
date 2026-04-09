@@ -1,5 +1,5 @@
 module.exports = {
-  id: "reply-urdu",
+  id: "acknowledgement-urd",
   label: "PS Acknowledgement Report (Urd)",
   buildPrompt: (ocrText, note) => {
     let prompt = `<urdu_correspondence_reply_system>
